@@ -1,6 +1,8 @@
 // src/index.js
-import express, { Express, Request, Response } from "express";
+import express, { Express } from "express";
 import dotenv from "dotenv";
+
+import { errorHandler } from "./middlewares/error";
 
 dotenv.config();
 
@@ -10,7 +12,14 @@ const connectDB = require("./config/db");
 
 connectDB();
 
-app.use("/products", require("./routes/productRoutes"));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+app.use("/products", require("./routes/product"));
+app.use("/users", require("./routes/user"));
+app.use("/orders", require("./routes/order"));
+
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
