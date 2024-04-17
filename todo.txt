@@ -1,0 +1,3 @@
+creating a check cart middleware
+right now you are figuring out how to populate the product property form each cart item which is nested
+check middlewares/order.ts

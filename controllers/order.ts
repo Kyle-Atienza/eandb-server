@@ -83,6 +83,7 @@ const remove = asyncHandler(async (req: AppRequest, res: Response) => {
 });
 
 module.exports = {
+  findCurrentCart,
   getOrders,
   add,
   remove,

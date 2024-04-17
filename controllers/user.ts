@@ -3,6 +3,8 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const asyncHandler = require("express-async-handler");
 
+const { findCurrentCart } = require("./order");
+
 const User = require("../models/user");
 
 const generateToken = (id: String) => {
@@ -45,11 +47,12 @@ const signUp = asyncHandler(async (req: Request, res: Response) => {
   }
 });
 
-const signIn = asyncHandler(async (req: Request, res: Response) => {
+const signIn = asyncHandler(async (req: AppRequest, res: Response) => {
   const { email, password } = req.body;
 
   // Check for user email
   const user = await User.findOne({ email });
+  const cart = await findCurrentCart(user._id);
 
   if (user && (await bcrypt.compare(password, user.password))) {
     res.json({
@@ -57,6 +60,7 @@ const signIn = asyncHandler(async (req: Request, res: Response) => {
       name: user.name,
       email: user.email,
       token: generateToken(user._id),
+      ...(cart && { cart: await cart.populate("items.product") }),
     });
   } else {
     res.status(400);

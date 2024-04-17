@@ -6,5 +6,6 @@ declare global {
   interface AppRequest extends Request {
     // Define your global type here
     user: Document;
+    cart: OrderDoc;
   }
 }

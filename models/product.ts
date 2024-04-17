@@ -5,7 +5,7 @@ declare global {
     _id: mongoose.Types.ObjectId;
     name: String;
     attribute?: String;
-    image: String;
+    image?: String;
     amount: Number;
   }
 }
@@ -22,7 +22,6 @@ const ProductSchema = new mongoose.Schema(
     },
     image: {
       type: String,
-      required: [true, "Please add an image"],
     },
     amount: {
       type: Number,

@@ -4,13 +4,18 @@ import { Response, NextFunction } from "express";
 
 const checkProductExist = asyncHandler(
   async (req: AppRequest, res: Response, next: NextFunction) => {
-    if (!req.body.productId) {
-      res.status(400);
-      throw new Error("Product is not provided");
-    }
-
     try {
-      await Product.findById(req.body.productId);
+      if (!req.body.productId) {
+        res.status(400);
+        throw new Error("Product is not provided");
+      }
+
+      const product = await Product.findById(req.body.productId);
+
+      if (!product) {
+        res.status(400);
+        throw new Error("Product does not exist");
+      }
 
       next();
     } catch (error) {
