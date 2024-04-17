@@ -1,4 +1,5 @@
 import { Response } from "express";
+import { findSourceMap } from "module";
 import mongoose from "mongoose";
 
 const asyncHandler = require("express-async-handler");
@@ -6,11 +7,13 @@ const asyncHandler = require("express-async-handler");
 const Product = require("../models/product");
 const { Order, CartItem } = require("../models/order");
 
-const findCurrentCart = async (userId: String) => {
-  return await Order.findOne({
+const findCart = async (userId: String) => {
+  const cart = await Order.findOne({
     user: userId,
     status: "Not processed",
   }).populate("items");
+
+  return cart ? cart.populate("items.product") : cart;
 };
 
 const getOrders = asyncHandler(async (req: AppRequest, res: Response) => {
@@ -21,8 +24,18 @@ const getOrders = asyncHandler(async (req: AppRequest, res: Response) => {
   res.status(200).json(carts);
 });
 
+const getCart = asyncHandler(async (req: AppRequest, res: Response) => {
+  try {
+    res.status(200);
+    res.json(await findCart(req.user._id));
+  } catch (error) {
+    res.status(400);
+    throw new Error("Cannot retrieve cart");
+  }
+});
+
 const add = asyncHandler(async (req: AppRequest, res: Response) => {
-  let cart = await findCurrentCart(req.user._id);
+  let cart = await findCart(req.user._id);
 
   const productItem = await Product.findById(req.body.productId);
   const newCartItemData = {
@@ -40,24 +53,26 @@ const add = asyncHandler(async (req: AppRequest, res: Response) => {
     cart = await cart.populate("items");
   } else {
     const cartItem = cart.items.find(
-      (item: any) => item.product.toString() === req.body.productId
+      (item: any) => item.product._id.toString() === req.body.productId
     );
+
+    console.log(cartItem);
 
     if (cartItem) {
       await CartItem.findByIdAndUpdate(cartItem._id, {
         $inc: { count: req.body.count || 1 },
       });
-      cart = await Order.findOne({
-        user: req.user._id,
-        status: "Not processed",
-      }).populate("items");
+      cart = await findCart(req.user._id);
     } else {
       const newCartItem = await CartItem.create(newCartItemData);
       cart = await Order.findOneAndUpdate(
         { user: req.user._id, status: "Not processed" },
         { $push: { items: newCartItem._id } },
         { new: true }
-      ).populate("items");
+      ).populate({
+        path: "items",
+        populate: "product",
+      });
     }
   }
 
@@ -65,10 +80,10 @@ const add = asyncHandler(async (req: AppRequest, res: Response) => {
 });
 
 const remove = asyncHandler(async (req: AppRequest, res: Response) => {
-  let cart = await findCurrentCart(req.user._id);
+  let cart = await findCart(req.user._id);
 
   const cartItem = cart.items.find(
-    (item: any) => item.product.toString() === req.body.productId
+    (item: any) => item.product._id.toString() === req.body.productId
   );
 
   await CartItem.deleteOne({ _id: cartItem._id });
@@ -77,13 +92,17 @@ const remove = asyncHandler(async (req: AppRequest, res: Response) => {
     { user: req.user._id, status: "Not processed" },
     { $pull: { items: cartItem._id } },
     { new: true }
-  ).populate("items");
+  ).populate({
+    path: "items",
+    populate: "product",
+  });
 
   res.status(200).json(cart);
 });
 
 module.exports = {
-  findCurrentCart,
+  findCart,
+  getCart,
   getOrders,
   add,
   remove,
