@@ -1,3 +1,12 @@
-creating a check cart middleware
-right now you are figuring out how to populate the product property form each cart item which is nested
-check middlewares/order.ts
+create productcategory Schema
+every product will have productcategory
+productcategory
+- name
+- description
+- images
+
+product
+- details: category ref
+
+
+update product to productitem in order

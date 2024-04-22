@@ -21,6 +21,7 @@ app.use(express.json());
 app.use("/products", require("./routes/product"));
 app.use("/users", require("./routes/user"));
 app.use("/orders", require("./routes/order"));
+app.use("/pay", require("./routes/order"));
 
 app.use(errorHandler);
 
