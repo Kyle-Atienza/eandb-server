@@ -26,7 +26,7 @@ const CartItemSchema = new mongoose.Schema(
   {
     product: {
       type: ObjectId,
-      ref: "Product",
+      ref: "ProductItem",
       required: [true, "Please add product"],
     },
     price: Number,

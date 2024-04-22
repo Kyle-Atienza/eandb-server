@@ -15,7 +15,6 @@ const getCart = asyncHandler(
       } else {
         req.cart = cart;
       } */
-      console.log(cart);
     } catch (error) {
       res.status(400);
       throw new Error("Cart cannot be found");

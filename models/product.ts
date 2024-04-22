@@ -43,30 +43,6 @@ const ProductOptionSchema = new mongoose.Schema({
   value: String,
 });
 
-/* const ProductSchema = new mongoose.Schema(
-  {
-    name: {
-      type: String,
-      required: [true, "Please add an name"],
-    },
-    // may be removed
-    attribute: {
-      type: String,
-      required: false,
-    },
-    image: {
-      type: String,
-    },
-    amount: {
-      type: Number,
-      required: [true, "Please add an amount"],
-    },
-  },
-  {
-    timestamps: true,
-  }
-); */
-
 const ProductItemSchema = new mongoose.Schema({
   name: {
     // temp
@@ -89,22 +65,17 @@ const ProductItemSchema = new mongoose.Schema({
   ],
 });
 
-/* const ProductGroup = mongoose.model<ProductDoc>(
-  "ProductGroup",
-  ProductGroupSchema
-); */
 const ProductOption = mongoose.model<ProductDoc>(
   "ProductOption",
   ProductOptionSchema
 );
-const Product = mongoose.model<ProductDoc>("Product", ProductSchema); // replace product group with this
+const Product = mongoose.model<ProductDoc>("Product", ProductSchema);
 const ProductItem = mongoose.model<ProductDoc>(
   "ProductItem",
   ProductItemSchema
 );
 
 module.exports = {
-  // ProductGroup,
   ProductOption,
   Product,
   ProductItem,

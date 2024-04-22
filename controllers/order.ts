@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 
 const asyncHandler = require("express-async-handler");
 
-const Product = require("../models/product");
+const { ProductItem } = require("../models/product");
 const { Order, CartItem } = require("../models/order");
 
 const findCart = async (userId: String) => {
@@ -37,7 +37,7 @@ const getCart = asyncHandler(async (req: AppRequest, res: Response) => {
 const add = asyncHandler(async (req: AppRequest, res: Response) => {
   let cart = await findCart(req.user._id);
 
-  const productItem = await Product.findById(req.body.productId);
+  const productItem = await ProductItem.findById(req.body.productId);
   const newCartItemData = {
     product: productItem._id,
     price: productItem.amount,
@@ -55,8 +55,6 @@ const add = asyncHandler(async (req: AppRequest, res: Response) => {
     const cartItem = cart.items.find(
       (item: any) => item.product._id.toString() === req.body.productId
     );
-
-    console.log(cartItem);
 
     if (cartItem) {
       await CartItem.findByIdAndUpdate(cartItem._id, {

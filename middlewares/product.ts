@@ -1,4 +1,4 @@
-const Product = require("../models/product");
+const { ProductItem } = require("../models/product");
 const asyncHandler = require("express-async-handler");
 import { Response, NextFunction } from "express";
 
@@ -10,7 +10,7 @@ const checkProductExist = asyncHandler(
         throw new Error("Product is not provided");
       }
 
-      const product = await Product.findById(req.body.productId);
+      const product = await ProductItem.findById(req.body.productId);
 
       if (!product) {
         res.status(400);
