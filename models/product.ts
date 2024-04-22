@@ -3,26 +3,24 @@ import mongoose from "mongoose";
 const { ObjectId } = mongoose.Schema;
 
 declare global {
-  interface ProductGroupDoc extends mongoose.Document {
+  interface ProductDoc extends mongoose.Document {
+    _id: mongoose.Types.ObjectId;
     name: string;
     description?: string;
     gallery: string[];
   }
-
-  interface ProductOptionDoc extends mongoose.Document {
-    type: string;
-    value: string;
-  }
-
-  interface ProductDoc extends mongoose.Document {
+  interface ProductItemDoc extends mongoose.Document {
     _id: mongoose.Types.ObjectId;
     name: String;
-    attribute?: String;
-    image?: String;
     amount: Number;
     //new
     details: mongoose.Types.ObjectId;
-    options: mongoose.Types.ObjectId[];
+    attributes: mongoose.Types.ObjectId[];
+  }
+  interface ProductOptionDoc extends mongoose.Document {
+    _id: mongoose.Types.ObjectId;
+    type: string;
+    value: string;
   }
 }
 
@@ -65,14 +63,14 @@ const ProductItemSchema = new mongoose.Schema({
   ],
 });
 
+const Product = mongoose.model<ProductItemDoc>("Product", ProductSchema);
+const ProductItem = mongoose.model<ProductItemDoc>(
+  "ProductItem",
+  ProductItemSchema
+);
 const ProductOption = mongoose.model<ProductDoc>(
   "ProductOption",
   ProductOptionSchema
-);
-const Product = mongoose.model<ProductDoc>("Product", ProductSchema);
-const ProductItem = mongoose.model<ProductDoc>(
-  "ProductItem",
-  ProductItemSchema
 );
 
 module.exports = {
