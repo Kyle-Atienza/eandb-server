@@ -10,12 +10,61 @@ const getProducts = asyncHandler(async (req: Request, res: Response) => {
 });
 
 const getProductItems = asyncHandler(async (req: Request, res: Response) => {
-  const products = await ProductItem.find()
-    .populate("attributes")
-    .populate({
-      path: "details",
-      options: { sort: "details.name" },
-    });
+  let products = await ProductItem.find().populate("details attributes");
+
+  res.status(200).json(products);
+});
+
+const getProductList = asyncHandler(async (req: Request, res: Response) => {
+  // let products = await ProductItem.find();
+  let products = await Product.aggregate([
+    {
+      $lookup: {
+        from: "productitems",
+        localField: "_id",
+        foreignField: "details",
+        as: "options",
+      },
+    },
+    {
+      $unwind: { path: "$options", preserveNullAndEmptyArrays: true },
+    },
+    {
+      $lookup: {
+        from: "productoptions",
+        localField: "options.attributes",
+        foreignField: "_id",
+        as: "options.attributes",
+      },
+    },
+    {
+      $group: {
+        _id: {
+          product: "$_id",
+          name: "$options.name",
+        },
+        name: { $first: { $concat: ["$name", " ", "$options.name"] } },
+        options: {
+          $addToSet: "$options",
+        },
+      },
+    },
+    {
+      $lookup: {
+        from: "products",
+        localField: "_id.product",
+        foreignField: "_id",
+        as: "product",
+      },
+    },
+    {
+      $group: {
+        _id: "$name",
+        options: { $first: "$options" },
+        details: { $first: "$product" },
+      },
+    },
+  ]);
 
   res.status(200).json(products);
 });
@@ -44,6 +93,7 @@ const script = asyncHandler(async (req: Request, res: Response) => {
 module.exports = {
   getProducts,
   getProductItems,
+  getProductList,
   createProduct,
 
   script,

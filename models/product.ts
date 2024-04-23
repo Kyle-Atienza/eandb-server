@@ -22,6 +22,10 @@ declare global {
     type: string;
     value: string;
   }
+
+  interface ProductListingItemDoc extends ProductDoc {
+    options: ProductItemDoc[];
+  }
 }
 
 // product
