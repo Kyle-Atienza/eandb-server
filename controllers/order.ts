@@ -1,3 +1,4 @@
+import { populate } from "dotenv";
 import { Response } from "express";
 import { findSourceMap } from "module";
 import mongoose from "mongoose";
@@ -7,13 +8,24 @@ const asyncHandler = require("express-async-handler");
 const { ProductItem } = require("../models/product");
 const { Order, CartItem } = require("../models/order");
 
+const populateCartItems = {
+  path: "items",
+  populate: {
+    path: "product",
+    populate: {
+      path: "details attributes",
+    },
+  },
+};
+
 const findCart = async (userId: String) => {
   const cart = await Order.findOne({
     user: userId,
     status: "Not processed",
-  }).populate("items");
+  }).populate(populateCartItems);
 
-  return cart ? cart.populate("items.product") : cart;
+  // return cart ? cart.populate("items.product") : cart;
+  return cart;
 };
 
 const getOrders = asyncHandler(async (req: AppRequest, res: Response) => {
@@ -67,10 +79,7 @@ const add = asyncHandler(async (req: AppRequest, res: Response) => {
         { user: req.user._id, status: "Not processed" },
         { $push: { items: newCartItem._id } },
         { new: true }
-      ).populate({
-        path: "items",
-        populate: "product",
-      });
+      ).populate(populateCartItems);
     }
   }
 
@@ -90,11 +99,7 @@ const remove = asyncHandler(async (req: AppRequest, res: Response) => {
     { user: req.user._id, status: "Not processed" },
     { $pull: { items: cartItem._id } },
     { new: true }
-  ).populate({
-    path: "items",
-    populate: "product",
-  });
-
+  ).populate(populateCartItems);
   res.status(200).json(cart);
 });
 

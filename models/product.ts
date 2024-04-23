@@ -24,6 +24,7 @@ declare global {
   }
 }
 
+// product
 const ProductSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -32,7 +33,9 @@ const ProductSchema = new mongoose.Schema({
   description: String,
   gallery: [String],
 });
+const Product = mongoose.model<ProductDoc>("Product", ProductSchema);
 
+// product option
 const ProductOptionSchema = new mongoose.Schema({
   type: {
     type: String,
@@ -40,7 +43,12 @@ const ProductOptionSchema = new mongoose.Schema({
   },
   value: String,
 });
+const ProductOption = mongoose.model<ProductOptionDoc>(
+  "ProductOption",
+  ProductOptionSchema
+);
 
+// product item
 const ProductItemSchema = new mongoose.Schema({
   name: {
     // temp
@@ -48,7 +56,7 @@ const ProductItemSchema = new mongoose.Schema({
     required: [true, "Please add an name"],
   },
   details: {
-    type: ObjectId,
+    type: mongoose.Types.ObjectId,
     ref: "Product",
   },
   amount: {
@@ -57,20 +65,14 @@ const ProductItemSchema = new mongoose.Schema({
   },
   attributes: [
     {
-      type: ObjectId,
+      type: mongoose.Types.ObjectId,
       ref: "ProductOption",
     },
   ],
 });
-
-const Product = mongoose.model<ProductItemDoc>("Product", ProductSchema);
 const ProductItem = mongoose.model<ProductItemDoc>(
   "ProductItem",
   ProductItemSchema
-);
-const ProductOption = mongoose.model<ProductDoc>(
-  "ProductOption",
-  ProductOptionSchema
 );
 
 module.exports = {
@@ -78,3 +80,39 @@ module.exports = {
   Product,
   ProductItem,
 };
+
+/* const test = () => {
+  Order.findById(orderId)
+    .populate("items")
+    .exec(function (err, order) {
+      if (err) {
+        console.error(err);
+        // Handle error
+        return;
+      }
+
+      // Populate the product details for each item
+      Order.populate(
+        order,
+        {
+          path: "items.product",
+          model: "CartItem",
+          populate: {
+            path: "product.details",
+            model: "ProductItem",
+          },
+        },
+        function (err, populatedOrder) {
+          if (err) {
+            console.error(err);
+            // Handle error
+            return;
+          }
+
+          // populatedOrder now contains the populated items.product.details field
+          console.log(populatedOrder);
+        }
+      );
+    });
+};
+ */

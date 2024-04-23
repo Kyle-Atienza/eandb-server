@@ -25,7 +25,7 @@ declare global {
 const CartItemSchema = new mongoose.Schema(
   {
     product: {
-      type: ObjectId,
+      type: mongoose.Types.ObjectId,
       ref: "ProductItem",
       required: [true, "Please add product"],
     },
@@ -37,8 +37,8 @@ const CartItemSchema = new mongoose.Schema(
 
 const OrderSchema = new mongoose.Schema(
   {
-    user: { type: ObjectId, ref: "User" },
-    items: [{ type: ObjectId, ref: "CartItem" }],
+    user: { type: mongoose.Types.ObjectId, ref: "User" },
+    items: [{ type: mongoose.Types.ObjectId, ref: "CartItem" }],
     amount: { type: Number },
     address: String,
     status: {
