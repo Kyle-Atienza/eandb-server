@@ -11,11 +11,12 @@ declare global {
   }
   interface ProductItemDoc extends mongoose.Document {
     _id: mongoose.Types.ObjectId;
-    name: String;
-    amount: Number;
+    name: string;
+    amount: number;
     //new
     details: mongoose.Types.ObjectId;
     attributes: mongoose.Types.ObjectId[];
+    stock: number;
   }
   interface ProductOptionDoc extends mongoose.Document {
     _id: mongoose.Types.ObjectId;
@@ -73,6 +74,10 @@ const ProductItemSchema = new mongoose.Schema({
       ref: "ProductOption",
     },
   ],
+  stock: {
+    type: Number,
+    default: 0,
+  },
 });
 const ProductItem = mongoose.model<ProductItemDoc>(
   "ProductItem",
@@ -84,39 +89,3 @@ module.exports = {
   Product,
   ProductItem,
 };
-
-/* const test = () => {
-  Order.findById(orderId)
-    .populate("items")
-    .exec(function (err, order) {
-      if (err) {
-        console.error(err);
-        // Handle error
-        return;
-      }
-
-      // Populate the product details for each item
-      Order.populate(
-        order,
-        {
-          path: "items.product",
-          model: "CartItem",
-          populate: {
-            path: "product.details",
-            model: "ProductItem",
-          },
-        },
-        function (err, populatedOrder) {
-          if (err) {
-            console.error(err);
-            // Handle error
-            return;
-          }
-
-          // populatedOrder now contains the populated items.product.details field
-          console.log(populatedOrder);
-        }
-      );
-    });
-};
- */

@@ -43,7 +43,15 @@ const getProductList = asyncHandler(async (req: Request, res: Response) => {
           product: "$_id",
           name: "$options.name",
         },
-        name: { $first: { $concat: ["$name", " ", "$options.name"] } },
+        name: {
+          $first: {
+            $cond: [
+              { $ne: ["$options.name", ""] }, // If options.name is not empty
+              { $concat: ["$name", " ", "$options.name"] }, // Concatenate name and options.name
+              "$name", // Otherwise, use just the name field
+            ],
+          },
+        },
         options: {
           $addToSet: "$options",
         },
