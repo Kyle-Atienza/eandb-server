@@ -8,6 +8,7 @@ declare global {
     name: string;
     description?: string;
     gallery: string[];
+    sort: number;
   }
   interface ProductItemDoc extends mongoose.Document {
     _id: mongoose.Types.ObjectId;
@@ -37,6 +38,10 @@ const ProductSchema = new mongoose.Schema({
   },
   description: String,
   gallery: [String],
+  sort: {
+    type: Number,
+    default: 0,
+  },
 });
 const Product = mongoose.model<ProductDoc>("Product", ProductSchema);
 
