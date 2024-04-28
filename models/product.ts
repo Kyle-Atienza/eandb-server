@@ -42,6 +42,10 @@ const ProductSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  group: {
+    type: String,
+    enum: ["oyster-mushroom", "banana", "taro"],
+  },
 });
 const Product = mongoose.model<ProductDoc>("Product", ProductSchema);
 

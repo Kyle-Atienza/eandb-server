@@ -88,8 +88,12 @@ const getProductItems = asyncHandler(async (req: Request, res: Response) => {
 });
 
 const getProductList = asyncHandler(async (req: Request, res: Response) => {
-  // let products = await ProductItem.find();
+  const { group } = req.query;
+
   let products = await Product.aggregate([
+    {
+      $match: group ? { group: group } : {},
+    },
     {
       $lookup: {
         from: "productitems",
@@ -181,7 +185,7 @@ const createProduct = asyncHandler(async (req: Request, res: Response) => {
 });
 
 const script = asyncHandler(async (req: Request, res: Response) => {
-  const response = await Product.updateMany({}, { sort: 0 });
+  const response = await Product.updateMany({}, { group: "" });
 
   res.status(200).json(response);
 });
