@@ -18,18 +18,30 @@ const getProducts = asyncHandler(async (req: Request, res: Response) => {
       $unwind: { path: "$options", preserveNullAndEmptyArrays: true },
     },
     {
-      $lookup: {
-        from: "productoptions",
-        localField: "options.attributes",
-        foreignField: "_id",
-        as: "options.attributes",
+      $group: {
+        _id: {
+          product: "$_id",
+          name: "$options.name",
+        },
+        options: {
+          $addToSet: "$options",
+        },
+      },
+    },
+    {
+      $set: {
+        _id: "$_id.product",
+        items: {
+          name: "$_id.name",
+          options: "$options",
+        },
       },
     },
     {
       $group: {
-        _id: "$options.details",
-        options: {
-          $addToSet: "$options",
+        _id: "$_id",
+        items: {
+          $addToSet: "$items",
         },
       },
     },
@@ -51,9 +63,9 @@ const getProducts = asyncHandler(async (req: Request, res: Response) => {
         gallery: "$details.gallery",
         sort: {
           $cond: {
-            if: { $eq: ["$details.sort", 0] }, // Check if the field equals 0
-            then: 99, // Assign a high value for sorting
-            else: "$details.sort", // Use the original field value for sorting
+            if: { $eq: ["$details.sort", 0] },
+            then: Number.POSITIVE_INFINITY,
+            else: "$details.sort",
           },
         },
       },
@@ -130,6 +142,20 @@ const getProductList = asyncHandler(async (req: Request, res: Response) => {
         _id: "$name",
         options: { $first: "$options" },
         details: { $first: "$product" },
+      },
+    },
+    {
+      $set: {
+        name: "$_id",
+        _id: {
+          $toLower: {
+            $replaceAll: {
+              input: "$_id",
+              find: " ",
+              replacement: "-",
+            },
+          },
+        },
       },
     },
     {
