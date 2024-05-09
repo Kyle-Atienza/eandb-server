@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const { ObjectId } = mongoose.Schema;
 
-declare global {
+/* declare global {
   interface ProductDoc extends mongoose.Document {
     _id: mongoose.Types.ObjectId;
     name: string;
@@ -28,7 +28,7 @@ declare global {
   interface ProductListingItemDoc extends ProductDoc {
     options: ProductItemDoc[];
   }
-}
+} */
 
 // product
 const ProductSchema = new mongoose.Schema({

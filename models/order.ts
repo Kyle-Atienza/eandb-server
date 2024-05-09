@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const { ObjectId } = mongoose.Schema;
 
-declare global {
+/* declare global {
   interface CartItemDoc extends mongoose.Document {
     _id: mongoose.Types.ObjectId;
     product: mongoose.Types.ObjectId;
@@ -20,7 +20,7 @@ declare global {
       default: 1;
     };
   }
-}
+} */
 
 const CartItemSchema = new mongoose.Schema(
   {

@@ -26,5 +26,5 @@ app.use("/pay", require("./routes/order"));
 app.use(errorHandler);
 
 app.listen(port, () => {
-  console.log(`[server]: Server is running at http://localhost:${port}`);
+  console.log(`[server]: Server is listening at port: ${port}`);
 });

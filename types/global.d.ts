@@ -8,4 +8,58 @@ declare global {
     user: Document;
     cart: OrderDoc;
   }
+
+  // order
+  interface CartItemDoc extends Document {
+    _id: mongoose.Types.ObjectId;
+    product: mongoose.Types.ObjectId;
+    price: Number;
+    count: Number;
+  }
+
+  interface OrderDoc extends Document {
+    _id: mongoose.Types.ObjectId;
+    items: [mongoose.Types.ObjectId];
+    amount: Number;
+    address: String;
+    status: {
+      type: Number;
+      default: 1;
+    };
+  }
+
+  //product
+  interface ProductDoc extends Document {
+    _id: mongoose.Types.ObjectId;
+    name: string;
+    description?: string;
+    gallery: string[];
+    sort: number;
+  }
+  interface ProductItemDoc extends Document {
+    _id: mongoose.Types.ObjectId;
+    name: string;
+    amount: number;
+    //new
+    details: mongoose.Types.ObjectId;
+    attributes: mongoose.Types.ObjectId[];
+    stock: number;
+  }
+  interface ProductOptionDoc extends Document {
+    _id: mongoose.Types.ObjectId;
+    type: string;
+    value: string;
+  }
+
+  interface ProductListingItemDoc extends ProductDoc {
+    options: ProductItemDoc[];
+  }
+
+  //user
+  interface UserDoc extends Document {
+    _id: mongoose.Types.ObjectId;
+    name: String;
+    email: String;
+    password: String;
+  }
 }

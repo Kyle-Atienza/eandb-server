@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
 
-declare global {
+/* declare global {
   interface UserDoc extends mongoose.Document {
     _id: mongoose.Types.ObjectId;
     name: String;
     email: String;
     password: String;
   }
-}
+} */
 
 const UserSchema = new mongoose.Schema(
   {
