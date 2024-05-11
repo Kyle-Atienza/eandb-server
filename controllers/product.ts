@@ -88,11 +88,11 @@ const getProductItems = asyncHandler(async (req: Request, res: Response) => {
 });
 
 const getProductList = asyncHandler(async (req: Request, res: Response) => {
-  const { group } = req.query;
+  const { group } = req.params;
 
   let products = await Product.aggregate([
     {
-      $match: group ? { group: group } : {},
+      $match: group && group !== "all" ? { group: group } : {},
     },
     {
       $lookup: {
