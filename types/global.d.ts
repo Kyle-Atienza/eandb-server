@@ -10,6 +10,13 @@ declare global {
   }
 
   // order
+  interface OrderAddressDoc {
+    _id: mongoose.Types.ObjectId;
+    address: String;
+    zip: String;
+    phone: String;
+    user: mongoose.Types.ObjectId;
+  }
   interface CartItemDoc extends Document {
     _id: mongoose.Types.ObjectId;
     product: mongoose.Types.ObjectId;
@@ -21,10 +28,13 @@ declare global {
     _id: mongoose.Types.ObjectId;
     items: [mongoose.Types.ObjectId];
     amount: Number;
-    address: String;
     status: {
       type: Number;
       default: 1;
+    };
+    address: {
+      shipping: mongoose.Types.ObjectId;
+      billing: mongoose.Types.ObjectId;
     };
   }
 
@@ -61,5 +71,17 @@ declare global {
     name: String;
     email: String;
     password: String;
+    defaults: {
+      address: {
+        shipping: mongoose.Types.ObjectId;
+        billing: mongoose.Types.ObjectId;
+      };
+    };
+  }
+  interface UserAddressDoc {
+    _id: mongoose.Types.ObjectId;
+    address: String;
+    zip: String;
+    phone: String;
   }
 }

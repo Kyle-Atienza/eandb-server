@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 const asyncHandler = require("express-async-handler");
 
 const { ProductItem } = require("../models/product");
-const { Order, CartItem } = require("../models/order");
+const { Order, CartItem, OrderAddress } = require("../models/order");
 
 const populateCartItems = {
   path: "items",
@@ -103,10 +103,27 @@ const remove = asyncHandler(async (req: AppRequest, res: Response) => {
   res.status(200).json(cart);
 });
 
+const getAdresses = asyncHandler(async (req: AppRequest, res: Response) => {
+  const addresses = await OrderAddress.find({ user: req.user._id });
+
+  res.status(200).json(addresses);
+});
+
+const createAddress = asyncHandler(async (req: AppRequest, res: Response) => {
+  const address = await OrderAddress.create({
+    ...req.body,
+    user: req.user._id,
+  });
+
+  res.status(200).json(address);
+});
+
 module.exports = {
   findCart,
   getCart,
   getOrders,
   add,
   remove,
+  createAddress,
+  getAdresses,
 };

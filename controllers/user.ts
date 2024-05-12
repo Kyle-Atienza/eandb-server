@@ -1,3 +1,4 @@
+import { populate } from "dotenv";
 import { Request, Response } from "express";
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
@@ -68,12 +69,25 @@ const signIn = asyncHandler(async (req: AppRequest, res: Response) => {
   }
 });
 
+const updateMe = asyncHandler(async (req: AppRequest, res: Response) => {
+  const user = await User.findOneAndUpdate({ _id: req.user._id }, req.body, {
+    new: true,
+  });
+
+  res.status(200).json(user);
+});
+
 const getMe = asyncHandler(async (req: AppRequest, res: Response) => {
-  res.status(200).json(req.user);
+  const user = await User.findOne({
+    _id: req.user._id,
+  }).populate(["defaults.address.billing", "defaults.address.shipping"]);
+
+  res.status(200).json(user);
 });
 
 module.exports = {
   signUp,
   signIn,
   getMe,
+  updateMe,
 };

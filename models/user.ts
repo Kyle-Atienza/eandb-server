@@ -15,6 +15,12 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please add a password"],
     },
+    defaults: {
+      address: {
+        shipping: { type: mongoose.Types.ObjectId, ref: "OrderAddress" },
+        billing: { type: mongoose.Types.ObjectId, ref: "OrderAddress" },
+      },
+    },
   },
   {
     timestamps: true,
