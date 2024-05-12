@@ -2,34 +2,6 @@ import mongoose from "mongoose";
 
 const { ObjectId } = mongoose.Schema;
 
-/* declare global {
-  interface ProductDoc extends mongoose.Document {
-    _id: mongoose.Types.ObjectId;
-    name: string;
-    description?: string;
-    gallery: string[];
-    sort: number;
-  }
-  interface ProductItemDoc extends mongoose.Document {
-    _id: mongoose.Types.ObjectId;
-    name: string;
-    amount: number;
-    //new
-    details: mongoose.Types.ObjectId;
-    attributes: mongoose.Types.ObjectId[];
-    stock: number;
-  }
-  interface ProductOptionDoc extends mongoose.Document {
-    _id: mongoose.Types.ObjectId;
-    type: string;
-    value: string;
-  }
-
-  interface ProductListingItemDoc extends ProductDoc {
-    options: ProductItemDoc[];
-  }
-} */
-
 // product
 const ProductSchema = new mongoose.Schema({
   name: {

@@ -2,26 +2,6 @@ import mongoose from "mongoose";
 
 const { ObjectId } = mongoose.Schema;
 
-/* declare global {
-  interface CartItemDoc extends mongoose.Document {
-    _id: mongoose.Types.ObjectId;
-    product: mongoose.Types.ObjectId;
-    price: Number;
-    count: Number;
-  }
-
-  interface OrderDoc extends mongoose.Document {
-    _id: mongoose.Types.ObjectId;
-    items: [mongoose.Types.ObjectId];
-    amount: Number;
-    address: String;
-    status: {
-      type: Number;
-      default: 1;
-    };
-  }
-} */
-
 const CartItemSchema = new mongoose.Schema(
   {
     product: {
