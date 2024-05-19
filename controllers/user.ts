@@ -61,6 +61,7 @@ const signIn = asyncHandler(async (req: AppRequest, res: Response) => {
       name: user.name,
       email: user.email,
       token: generateToken(user._id),
+      defaults: user.defaults,
       ...(cart && { cart: await cart }),
     });
   } else {
@@ -70,6 +71,8 @@ const signIn = asyncHandler(async (req: AppRequest, res: Response) => {
 });
 
 const updateMe = asyncHandler(async (req: AppRequest, res: Response) => {
+  console.log(req.body);
+
   const user = await User.findOneAndUpdate({ _id: req.user._id }, req.body, {
     new: true,
   });

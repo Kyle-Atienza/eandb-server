@@ -103,10 +103,28 @@ const remove = asyncHandler(async (req: AppRequest, res: Response) => {
   res.status(200).json(cart);
 });
 
-const getAdresses = asyncHandler(async (req: AppRequest, res: Response) => {
+const getAddresses = asyncHandler(async (req: AppRequest, res: Response) => {
   const addresses = await OrderAddress.find({ user: req.user._id });
 
   res.status(200).json(addresses);
+});
+
+const updateAddress = asyncHandler(async (req: AppRequest, res: Response) => {
+  const { id } = req.params;
+
+  const address = await OrderAddress.findByIdAndUpdate({ _id: id }, req.body, {
+    new: true,
+  });
+
+  res.status(200).json(address);
+});
+
+const deleteAddress = asyncHandler(async (req: AppRequest, res: Response) => {
+  const { id } = req.params;
+
+  await OrderAddress.findOneAndDelete({ _id: id });
+
+  res.status(200).json({ message: `Address ID ${id} Deleted` });
 });
 
 const createAddress = asyncHandler(async (req: AppRequest, res: Response) => {
@@ -125,5 +143,7 @@ module.exports = {
   add,
   remove,
   createAddress,
-  getAdresses,
+  updateAddress,
+  deleteAddress,
+  getAddresses,
 };
