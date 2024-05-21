@@ -10,12 +10,12 @@ const { Order, CartItem, OrderAddress } = require("../models/order");
 
 const populateCartItems = {
   path: "items",
-  populate: {
+  /* populate: {
     path: "product",
     populate: {
       path: "details attributes",
     },
-  },
+  }, */
 };
 
 const findCart = async (userId: String) => {
@@ -49,10 +49,9 @@ const getCart = asyncHandler(async (req: AppRequest, res: Response) => {
 const add = asyncHandler(async (req: AppRequest, res: Response) => {
   let cart = await findCart(req.user._id);
 
-  const productItem = await ProductItem.findById(req.body.productId);
+  const productItem = await ProductItem.findById(req.body.productItemId);
   const newCartItemData = {
-    product: productItem._id,
-    price: productItem.amount,
+    productItemId: productItem._id,
     count: req.body.count || 1,
   };
 
@@ -65,7 +64,7 @@ const add = asyncHandler(async (req: AppRequest, res: Response) => {
     cart = await cart.populate("items");
   } else {
     const cartItem = cart.items.find(
-      (item: any) => item.product._id.toString() === req.body.productId
+      (item: any) => item.productItemId.toString() === req.body.productItemId
     );
 
     if (cartItem) {
@@ -90,7 +89,7 @@ const remove = asyncHandler(async (req: AppRequest, res: Response) => {
   let cart = await findCart(req.user._id);
 
   const cartItem = cart.items.find(
-    (item: any) => item.product._id.toString() === req.body.productId
+    (item: any) => item.productItemId.toString() === req.body.productItemId
   );
 
   await CartItem.deleteOne({ _id: cartItem._id });
