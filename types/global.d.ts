@@ -19,8 +19,8 @@ declare global {
   }
   interface CartItemDoc extends Document {
     _id: mongoose.Types.ObjectId;
-    product: mongoose.Types.ObjectId;
-    price: Number;
+    productItemId: mongoose.Types.ObjectId;
+    // price: Number;
     count: Number;
   }
 

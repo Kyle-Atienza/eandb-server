@@ -10,12 +10,12 @@ const { Order, CartItem, OrderAddress } = require("../models/order");
 
 const populateCartItems = {
   path: "items",
-  populate: {
+  /* populate: {
     path: "product",
     populate: {
       path: "details attributes",
     },
-  },
+  }, */
 };
 
 const findCart = async (userId: String) => {
@@ -49,10 +49,9 @@ const getCart = asyncHandler(async (req: AppRequest, res: Response) => {
 const add = asyncHandler(async (req: AppRequest, res: Response) => {
   let cart = await findCart(req.user._id);
 
-  const productItem = await ProductItem.findById(req.body.productId);
+  const productItem = await ProductItem.findById(req.body.productItemId);
   const newCartItemData = {
-    product: productItem._id,
-    price: productItem.amount,
+    productItemId: productItem._id,
     count: req.body.count || 1,
   };
 
@@ -65,7 +64,7 @@ const add = asyncHandler(async (req: AppRequest, res: Response) => {
     cart = await cart.populate("items");
   } else {
     const cartItem = cart.items.find(
-      (item: any) => item.product._id.toString() === req.body.productId
+      (item: any) => item.productItemId.toString() === req.body.productItemId
     );
 
     if (cartItem) {
@@ -90,7 +89,7 @@ const remove = asyncHandler(async (req: AppRequest, res: Response) => {
   let cart = await findCart(req.user._id);
 
   const cartItem = cart.items.find(
-    (item: any) => item.product._id.toString() === req.body.productId
+    (item: any) => item.productItemId.toString() === req.body.productItemId
   );
 
   await CartItem.deleteOne({ _id: cartItem._id });
@@ -103,10 +102,28 @@ const remove = asyncHandler(async (req: AppRequest, res: Response) => {
   res.status(200).json(cart);
 });
 
-const getAdresses = asyncHandler(async (req: AppRequest, res: Response) => {
+const getAddresses = asyncHandler(async (req: AppRequest, res: Response) => {
   const addresses = await OrderAddress.find({ user: req.user._id });
 
   res.status(200).json(addresses);
+});
+
+const updateAddress = asyncHandler(async (req: AppRequest, res: Response) => {
+  const { id } = req.params;
+
+  const address = await OrderAddress.findByIdAndUpdate({ _id: id }, req.body, {
+    new: true,
+  });
+
+  res.status(200).json(address);
+});
+
+const deleteAddress = asyncHandler(async (req: AppRequest, res: Response) => {
+  const { id } = req.params;
+
+  await OrderAddress.findOneAndDelete({ _id: id });
+
+  res.status(200).json({ message: `Address ID ${id} Deleted` });
 });
 
 const createAddress = asyncHandler(async (req: AppRequest, res: Response) => {
@@ -125,5 +142,7 @@ module.exports = {
   add,
   remove,
   createAddress,
-  getAdresses,
+  updateAddress,
+  deleteAddress,
+  getAddresses,
 };

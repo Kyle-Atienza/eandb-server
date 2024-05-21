@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 const asyncHandler = require("express-async-handler");
 
 const { Product, ProductItem } = require("../models/product");
+const { OrderAddress, Order } = require("../models/order");
 
 const getProducts = asyncHandler(async (req: Request, res: Response) => {
   // const products = await Product.find();
@@ -185,7 +186,16 @@ const createProduct = asyncHandler(async (req: Request, res: Response) => {
 });
 
 const script = asyncHandler(async (req: Request, res: Response) => {
-  const response = await Product.updateMany({}, { group: "" });
+  // const response = await Product.updateMany({}, { group: "" });
+  const response = await Order.updateMany(
+    {},
+    {
+      address: {
+        billing: null,
+        shipping: null,
+      },
+    }
+  );
 
   res.status(200).json(response);
 });

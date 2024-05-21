@@ -9,7 +9,9 @@ const {
   add,
   remove,
   createAddress,
-  getAdresses,
+  updateAddress,
+  deleteAddress,
+  getAddresses,
 } = require("../controllers/order");
 
 router.get("/", protect, getOrders);
@@ -18,6 +20,8 @@ router.post("/cart/add", protect, checkProductExist, add);
 router.post("/cart/remove", protect, checkProductExist, remove);
 
 router.post("/address", protect, createAddress);
-router.get("/address", protect, getAdresses);
+router.put("/address/:id", protect, updateAddress);
+router.delete("/address/:id", protect, deleteAddress);
+router.get("/address", protect, getAddresses);
 
 module.exports = router;
