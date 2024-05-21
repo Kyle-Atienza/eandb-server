@@ -24,7 +24,7 @@ const OrderAddressSchema = new mongoose.Schema({
 
 const CartItemSchema = new mongoose.Schema(
   {
-    product: {
+    productItemId: {
       type: mongoose.Types.ObjectId,
       ref: "ProductItem",
       required: [true, "Please add product"],
@@ -52,8 +52,8 @@ const OrderSchema = new mongoose.Schema(
       ],
     },
     address: {
-      shipping: [{ type: mongoose.Types.ObjectId, ref: "OrderAddress" }],
-      billing: [{ type: mongoose.Types.ObjectId, ref: "OrderAddress" }],
+      shipping: { type: mongoose.Types.ObjectId, ref: "OrderAddress" },
+      billing: { type: mongoose.Types.ObjectId, ref: "OrderAddress" },
     },
   },
   { timestamps: true }
