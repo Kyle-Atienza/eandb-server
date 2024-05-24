@@ -43,8 +43,17 @@ declare global {
     _id: mongoose.Types.ObjectId;
     name: string;
     description?: string;
+    taglines?: string;
     gallery: string[];
     sort: number;
+    nutritionalFacts: {
+      content: string;
+      value: string;
+    }[];
+    ingredients: string[];
+    allergens: string[];
+    awards: string[];
+    netWeight: string;
   }
   interface ProductItemDoc extends Document {
     _id: mongoose.Types.ObjectId;

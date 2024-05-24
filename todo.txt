@@ -1,2 +1,5 @@
-reset orders and cart items
-update cart item schema to only use productItem id and quantity
+properties to add on product
+- nutritionalFacts
+- ingredients
+- allergens
+- awards

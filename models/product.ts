@@ -9,6 +9,7 @@ const ProductSchema = new mongoose.Schema({
     required: [true, "Please add a name"],
   },
   description: String,
+  taglines: String,
   gallery: [String],
   sort: {
     type: Number,
@@ -18,6 +19,16 @@ const ProductSchema = new mongoose.Schema({
     type: String,
     enum: ["oyster-mushroom", "banana", "taro"],
   },
+  nutritionalFacts: [
+    {
+      content: String,
+      value: String,
+    },
+  ],
+  ingredients: [String],
+  allergens: [String],
+  awards: [String],
+  netWeight: String,
 });
 const Product = mongoose.model<ProductDoc>("Product", ProductSchema);
 

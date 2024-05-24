@@ -187,13 +187,10 @@ const createProduct = asyncHandler(async (req: Request, res: Response) => {
 
 const script = asyncHandler(async (req: Request, res: Response) => {
   // const response = await Product.updateMany({}, { group: "" });
-  const response = await Order.updateMany(
-    {},
+  const response = await Product.updateMany(
+    { _id: "662529d40658cf1ba44a7d46" },
     {
-      address: {
-        billing: null,
-        shipping: null,
-      },
+      awards: "Most Innovative Product of MIMAROPA 2016",
     }
   );
 
