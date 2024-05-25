@@ -187,10 +187,10 @@ const createProduct = asyncHandler(async (req: Request, res: Response) => {
 
 const script = asyncHandler(async (req: Request, res: Response) => {
   // const response = await Product.updateMany({}, { group: "" });
-  const response = await Product.updateMany(
-    { _id: "662529d40658cf1ba44a7d46" },
+  const response = await ProductItem.updateMany(
+    { name: "Big Jar", details: "6625b1ac50df1852b700ff8d" },
     {
-      awards: "Most Innovative Product of MIMAROPA 2016",
+      netWeight: "220g",
     }
   );
 

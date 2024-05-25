@@ -70,6 +70,7 @@ const ProductItemSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  netWeight: String,
 });
 const ProductItem = mongoose.model<ProductItemDoc>(
   "ProductItem",

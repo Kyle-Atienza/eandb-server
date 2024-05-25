@@ -63,6 +63,7 @@ declare global {
     details: mongoose.Types.ObjectId;
     attributes: mongoose.Types.ObjectId[];
     stock: number;
+    netWeight: string;
   }
   interface ProductOptionDoc extends Document {
     _id: mongoose.Types.ObjectId;
