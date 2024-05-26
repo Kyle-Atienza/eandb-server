@@ -83,7 +83,9 @@ const getProducts = asyncHandler(async (req: Request, res: Response) => {
 });
 
 const getProductItems = asyncHandler(async (req: Request, res: Response) => {
-  let products = await ProductItem.find().populate("details attributes");
+  let products = await ProductItem.find().populate(
+    "details attributes attribute"
+  );
 
   res.status(200).json(products);
 });
@@ -113,6 +115,17 @@ const getProductList = asyncHandler(async (req: Request, res: Response) => {
         foreignField: "_id",
         as: "options.attributes",
       },
+    },
+    {
+      $lookup: {
+        from: "productoptions",
+        localField: "options.attribute",
+        foreignField: "_id",
+        as: "options.attribute",
+      },
+    },
+    {
+      $unwind: { path: "$options.attribute", preserveNullAndEmptyArrays: true },
     },
     {
       $group: {
@@ -187,12 +200,23 @@ const createProduct = asyncHandler(async (req: Request, res: Response) => {
 
 const script = asyncHandler(async (req: Request, res: Response) => {
   // const response = await Product.updateMany({}, { group: "" });
-  const response = await ProductItem.updateMany(
-    { name: "Big Jar", details: "6625b1ac50df1852b700ff8d" },
+  const response = await ProductItem.updateMany({}, [
     {
-      netWeight: "220g",
-    }
-  );
+      $set: {
+        attribute: {
+          $cond: {
+            if: {
+              $anyElementTrue: ["$attributes"],
+            },
+            then: {
+              $arrayElemAt: ["$attributes", 0],
+            },
+            else: "",
+          },
+        },
+      },
+    },
+  ]);
 
   res.status(200).json(response);
 });

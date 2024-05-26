@@ -66,6 +66,10 @@ const ProductItemSchema = new mongoose.Schema({
       ref: "ProductOption",
     },
   ],
+  attribute: {
+    type: mongoose.Types.ObjectId,
+    ref: "ProductOption",
+  },
   stock: {
     type: Number,
     default: 0,

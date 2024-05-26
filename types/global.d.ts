@@ -62,6 +62,7 @@ declare global {
     //new
     details: mongoose.Types.ObjectId;
     attributes: mongoose.Types.ObjectId[];
+    attribute: mongoose.Types.ObjectId;
     stock: number;
     netWeight: string;
   }
