@@ -200,23 +200,17 @@ const createProduct = asyncHandler(async (req: Request, res: Response) => {
 
 const script = asyncHandler(async (req: Request, res: Response) => {
   // const response = await Product.updateMany({}, { group: "" });
-  const response = await ProductItem.updateMany({}, [
+  const response = await ProductItem.updateMany(
+    { _id: "661c7308d2b434b86fee306e" },
     {
-      $set: {
-        attribute: {
-          $cond: {
-            if: {
-              $anyElementTrue: ["$attributes"],
-            },
-            then: {
-              $arrayElemAt: ["$attributes", 0],
-            },
-            else: "",
-          },
+      $push: {
+        images: {
+          url: "https://res.cloudinary.com/dfdw1yzkk/image/upload/v1716729266/E%20and%20B%20Farm/products/images/three-fourths/a9yd7qybduijzf2pabkm.png",
+          tag: "three fourths",
         },
       },
-    },
-  ]);
+    }
+  );
 
   res.status(200).json(response);
 });

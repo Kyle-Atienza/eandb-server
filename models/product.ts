@@ -61,6 +61,7 @@ const ProductItemSchema = new mongoose.Schema({
     required: [true, "Please add an amount"],
   },
   attributes: [
+    // need to remove
     {
       type: mongoose.Types.ObjectId,
       ref: "ProductOption",
@@ -75,6 +76,16 @@ const ProductItemSchema = new mongoose.Schema({
     default: 0,
   },
   netWeight: String,
+  images: [
+    {
+      url: String,
+      tag: {
+        type: String,
+        default: "",
+        enum: ["", "thumbnail", "three fourths", "square"],
+      },
+    },
+  ],
 });
 const ProductItem = mongoose.model<ProductItemDoc>(
   "ProductItem",
