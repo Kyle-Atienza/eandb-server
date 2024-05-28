@@ -1,0 +1,693 @@
+[
+  {
+    "_id": "66265772682f454279097137",
+    "options": [
+      {
+        "name": "Small Jar",
+        "variants": [
+          {
+            "_id": "661c738bd2b434b86fee307e",
+            "name": "Small Jar",
+            "amount": 100,
+            "attributes": [],
+            "details": "66265772682f454279097137",
+            "netWeight": "0g",
+            "images": []
+          }
+        ]
+      },
+      {
+        "name": "Big Jar",
+        "variants": [
+          {
+            "_id": "661c7387d2b434b86fee307c",
+            "name": "Big Jar",
+            "amount": 200,
+            "attributes": [],
+            "details": "66265772682f454279097137",
+            "netWeight": "0g",
+            "images": []
+          }
+        ]
+      }
+    ],
+    "details": {
+      "_id": "66265772682f454279097137",
+      "name": "Oyster Mushroom Sisig",
+      "description": "Relish the bold flavors of E and B Farm's Oyster Mushroom Sisig. Our plant-based version of this classic Filipino dish features finely chopped oyster mushrooms, cooked with onions, chili, and a medley of spices to create a savory, spicy, and tangy treat. It's a delicious and healthy alternative that doesn’t compromise on taste.",
+      "gallery": [
+        "https://res.cloudinary.com/dfdw1yzkk/image/upload/v1712994721/E%20and%20B%20Farm/products/images/square/bf0cdrgledzsm1sm8bdn.png"
+      ],
+      "__v": 0,
+      "sort": 0,
+      "group": "Oyster Mushroom",
+      "taglines": "Bold flavors, plant-based perfection.",
+      "allergens": [],
+      "ingredients": [],
+      "nutritionalFacts": [],
+      "netWeight": "0g"
+    }
+  },
+  {
+    "_id": "662657b5682f454279097138",
+    "options": [
+      {
+        "name": "Big Jar",
+        "variants": [
+          {
+            "_id": "661c739ad2b434b86fee3080",
+            "name": "Big Jar",
+            "amount": 250,
+            "attributes": [],
+            "details": "662657b5682f454279097138",
+            "netWeight": "0g",
+            "images": []
+          }
+        ]
+      },
+      {
+        "name": "Small Jar",
+        "variants": [
+          {
+            "_id": "661c739dd2b434b86fee3082",
+            "name": "Small Jar",
+            "amount": 120,
+            "attributes": [],
+            "details": "662657b5682f454279097138",
+            "netWeight": "0g",
+            "images": []
+          }
+        ]
+      }
+    ],
+    "details": {
+      "_id": "662657b5682f454279097138",
+      "name": "Oyster Mushroom Spanish Style",
+      "description": "Delight in the rich and robust flavors of E and B Farm's Oyster Mushroom Spanish Style. Marinated in a blend of olive oil, garlic, and herbs, these mushrooms are infused with the traditional flavors of Spanish cuisine. Each bite is a harmonious blend of earthiness and aromatic spices, perfect for tapas or as an addition to your favorite dishes.",
+      "gallery": [
+        "https://res.cloudinary.com/dfdw1yzkk/image/upload/v1712994721/E%20and%20B%20Farm/products/images/square/wdf6pdcxlrx4f7clvvf6.png"
+      ],
+      "__v": 0,
+      "sort": 0,
+      "group": "Oyster Mushroom",
+      "taglines": "A taste of Spain in every bite.",
+      "allergens": [],
+      "ingredients": [],
+      "nutritionalFacts": [],
+      "netWeight": "0g"
+    }
+  },
+  {
+    "_id": "662529d40658cf1ba44a7d46",
+    "options": [
+      {
+        "name": "",
+        "variants": [
+          {
+            "_id": "661a54b5f869d84e5f60819d",
+            "name": "",
+            "amount": 130,
+            "attributes": ["6625310b0c24a77fc62b8f57"],
+            "details": "662529d40658cf1ba44a7d46",
+            "netWeight": "0g",
+            "attribute": {
+              "_id": "6625310b0c24a77fc62b8f57",
+              "type": "Flavor",
+              "value": "Plain"
+            },
+            "images": [
+              {
+                "url": "https://res.cloudinary.com/dfdw1yzkk/image/upload/v1716729178/E%20and%20B%20Farm/products/images/three-fourths/w8dp0disga9j7de7kqm0.png",
+                "tag": "three fourths",
+                "_id": "6653d718fd81d8eae399eac1"
+              }
+            ]
+          },
+          {
+            "_id": "6625aab431670215aa4320ad",
+            "name": "",
+            "amount": 130,
+            "attributes": ["662531180c24a77fc62b8f58"],
+            "details": "662529d40658cf1ba44a7d46",
+            "netWeight": "0g",
+            "attribute": {
+              "_id": "662531180c24a77fc62b8f58",
+              "type": "Flavor",
+              "value": "Barbeque"
+            },
+            "images": [
+              {
+                "url": "https://res.cloudinary.com/dfdw1yzkk/image/upload/v1716729213/E%20and%20B%20Farm/products/images/three-fourths/mommaafylvokvmwt4nny.png",
+                "tag": "three fourths",
+                "_id": "6653d6a0cdea2ebade978f0a"
+              }
+            ]
+          },
+          {
+            "_id": "6625aae531670215aa4320ae",
+            "name": "",
+            "amount": 130,
+            "attributes": ["662531270c24a77fc62b8f59"],
+            "details": "662529d40658cf1ba44a7d46",
+            "netWeight": "0g",
+            "attribute": {
+              "_id": "662531270c24a77fc62b8f59",
+              "type": "Flavor",
+              "value": "Cheese"
+            },
+            "images": [
+              {
+                "url": "https://res.cloudinary.com/dfdw1yzkk/image/upload/v1716729207/E%20and%20B%20Farm/products/images/three-fourths/zok6jeycknoul8lnp1ns.png",
+                "tag": "three fourths",
+                "_id": "6653d6cd44f04ffd56e4f81a"
+              }
+            ]
+          },
+          {
+            "_id": "6625aaf831670215aa4320af",
+            "name": "",
+            "amount": 130,
+            "attributes": ["662531340c24a77fc62b8f5a"],
+            "details": "662529d40658cf1ba44a7d46",
+            "netWeight": "0g",
+            "attribute": {
+              "_id": "662531340c24a77fc62b8f5a",
+              "type": "Flavor",
+              "value": "Sour Cream"
+            },
+            "images": [
+              {
+                "url": "https://res.cloudinary.com/dfdw1yzkk/image/upload/v1716729202/E%20and%20B%20Farm/products/images/three-fourths/tsfrsojku96yfdpccsan.png",
+                "tag": "three fourths",
+                "_id": "6653d6ed6bba2ae12a3bfee9"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "details": {
+      "_id": "662529d40658cf1ba44a7d46",
+      "name": "Oyster Mushroom Chicharon",
+      "description": "Indulge in the crispy delight of E and B Farm's Oyster Mushroom Chicharon, available in four irresistible flavors: Plain, Cheese, Barbeque, and Sour Cream. Made from the finest, freshly harvested oyster mushrooms, this guilt-free snack offers a healthy alternative to traditional pork chicharon without sacrificing the satisfying crunch. Each flavor is expertly seasoned to provide a unique and delicious taste experience, from the simple and savory Plain to the tangy and rich Sour Cream.",
+      "gallery": [
+        "https://res.cloudinary.com/dfdw1yzkk/image/upload/v1712994720/E%20and%20B%20Farm/products/images/square/af8k4pwotuc9p9nlb6aa.png"
+      ],
+      "__v": 0,
+      "sort": 1,
+      "group": "Oyster Mushroom",
+      "taglines": "Guilt-free goodness in every crunch!",
+      "allergens": [],
+      "ingredients": [
+        "Oyster Mushroom",
+        "Cassava Flour",
+        "Coconut Oil",
+        "Salt",
+        "Pepper",
+        "Garlic Powder"
+      ],
+      "nutritionalFacts": [
+        {
+          "content": "Serving Size",
+          "value": "33g",
+          "_id": "6650a4231655c8fa940e48c4"
+        },
+        {
+          "content": "Calories",
+          "value": "171g",
+          "_id": "6650a4231655c8fa940e48c5"
+        },
+        {
+          "content": "Sat Fat",
+          "value": "4g",
+          "_id": "6650a4231655c8fa940e48c6"
+        },
+        {
+          "content": "Trans Fat",
+          "value": "0g",
+          "_id": "6650a4231655c8fa940e48c7"
+        },
+        {
+          "content": "Cholesterol",
+          "value": "0g",
+          "_id": "6650a4231655c8fa940e48c8"
+        },
+        {
+          "content": "Sodium",
+          "value": "172mg",
+          "_id": "6650a4231655c8fa940e48c9"
+        },
+        {
+          "content": "Total Carbohydrate",
+          "value": "14g",
+          "_id": "6650a4231655c8fa940e48ca"
+        },
+        {
+          "content": "Sugar",
+          "value": "0g",
+          "_id": "6650a4231655c8fa940e48cb"
+        },
+        {
+          "content": "Protein",
+          "value": "5g",
+          "_id": "6650a4231655c8fa940e48cc"
+        },
+        {
+          "content": "Vit C",
+          "value": "5mg",
+          "_id": "6650a4231655c8fa940e48cd"
+        }
+      ],
+      "netWeight": "80g",
+      "awards": ["Most Innovative Product of MIMAROPA 2016"]
+    }
+  },
+  {
+    "_id": "662656e6682f454279097135",
+    "options": [
+      {
+        "name": "Big Jar",
+        "variants": [
+          {
+            "_id": "66266e07a889ef23b0677571",
+            "name": "Big Jar",
+            "amount": 110,
+            "attributes": [],
+            "details": "662656e6682f454279097135",
+            "netWeight": "0g",
+            "images": []
+          }
+        ]
+      },
+      {
+        "name": "Small Jar",
+        "variants": [
+          {
+            "_id": "661c734ed2b434b86fee3076",
+            "name": "Small Jar",
+            "amount": 65,
+            "attributes": [],
+            "details": "662656e6682f454279097135",
+            "netWeight": "0g",
+            "images": []
+          }
+        ]
+      }
+    ],
+    "details": {
+      "_id": "662656e6682f454279097135",
+      "name": "Taro Strips",
+      "description": "Savor the earthy flavor and crisp texture of E and B Farm's Taro Strips. Made from fresh, handpicked taro roots, these strips are thinly sliced and expertly fried to create a light and crunchy snack. Seasoned just right, our Taro Strips are a delightful alternative to regular potato chips, offering a unique taste experience.",
+      "gallery": [],
+      "__v": 0,
+      "sort": 3,
+      "group": "Taro",
+      "taglines": "Earthy crunch, naturally delicious.",
+      "allergens": [],
+      "ingredients": [],
+      "nutritionalFacts": [],
+      "netWeight": "0g"
+    }
+  },
+  {
+    "_id": "662657cd682f45427909713a",
+    "options": [
+      {
+        "name": "Small",
+        "variants": [
+          {
+            "_id": "661c73cdd2b434b86fee3088",
+            "name": "Small",
+            "amount": 50,
+            "attributes": [],
+            "details": "662657cd682f45427909713a",
+            "netWeight": "0g",
+            "images": []
+          }
+        ]
+      },
+      {
+        "name": "Big",
+        "variants": [
+          {
+            "_id": "661c73c8d2b434b86fee3086",
+            "name": "Big",
+            "amount": 100,
+            "attributes": [],
+            "details": "662657cd682f45427909713a",
+            "netWeight": "0g",
+            "images": []
+          }
+        ]
+      }
+    ],
+    "details": {
+      "_id": "662657cd682f45427909713a",
+      "name": "Nipa Vinegar",
+      "description": "Discover the distinct and tangy flavor of E and B Farm's Nipa Vinegar. Harvested from the sap of nipa palm trees, this traditional vinegar offers a unique taste that stands out from regular vinegars. Its slightly sweet and sour profile makes it an excellent choice for cooking, marinating, or as a dipping sauce.",
+      "gallery": [
+        "https://res.cloudinary.com/dfdw1yzkk/image/upload/v1712994719/E%20and%20B%20Farm/products/images/square/vffwaqalh9f01dwhdlnn.png"
+      ],
+      "__v": 0,
+      "sort": 0,
+      "group": "",
+      "taglines": "Traditional tang, naturally crafted.",
+      "allergens": [],
+      "ingredients": [],
+      "nutritionalFacts": [],
+      "netWeight": "0g"
+    }
+  },
+  {
+    "_id": "6625b02550df1852b700ff8c",
+    "options": [
+      {
+        "name": "",
+        "variants": [
+          {
+            "_id": "661c72eed2b434b86fee306a",
+            "name": "",
+            "amount": 130,
+            "details": "6625b02550df1852b700ff8c",
+            "attributes": [],
+            "netWeight": "0g",
+            "images": []
+          }
+        ]
+      }
+    ],
+    "details": {
+      "_id": "6625b02550df1852b700ff8c",
+      "name": "Oyster Mushroom Sticks",
+      "description": "Experience the natural sweetness of E and B Farm's Banana Sticks. Made from carefully selected ripe bananas, these sticks are dehydrated to perfection, preserving their rich, sweet flavor and chewy texture. A wholesome snack option, our Banana Sticks are free from artificial additives, making them a perfect treat for health-conscious individuals.",
+      "gallery": [],
+      "__v": 0,
+      "sort": 4,
+      "group": "Oyster Mushroom",
+      "taglines": "Wholesome bites of savory delight.",
+      "allergens": [],
+      "ingredients": [],
+      "nutritionalFacts": [],
+      "netWeight": "0g"
+    }
+  },
+  {
+    "_id": "662657c0682f454279097139",
+    "options": [
+      {
+        "name": "",
+        "variants": [
+          {
+            "_id": "661c73b9d2b434b86fee3084",
+            "name": "",
+            "amount": 100,
+            "attributes": [],
+            "details": "662657c0682f454279097139",
+            "netWeight": "120g",
+            "images": [
+              {
+                "url": "https://res.cloudinary.com/dfdw1yzkk/image/upload/v1716729169/E%20and%20B%20Farm/products/images/three-fourths/e13jxabbxvuaacsoatvj.png",
+                "tag": "three fourths",
+                "_id": "6653d755ede48dfc73a52000"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "details": {
+      "_id": "662657c0682f454279097139",
+      "name": "Oyster Mushroom Chilli Garlic Paste",
+      "description": "Add a kick to your meals with E and B Farm's Oyster Mushroom Chilli Garlic Paste. This fiery condiment is made from fresh oyster mushrooms, blended with chili peppers and garlic to create a paste that's bursting with bold flavors. It's the perfect way to spice up your dishes with a healthy and flavorful twist.",
+      "gallery": [
+        "https://res.cloudinary.com/dfdw1yzkk/image/upload/v1712994721/E%20and%20B%20Farm/products/images/square/wnvzagubcodukdjazfrh.png"
+      ],
+      "__v": 0,
+      "sort": 0,
+      "group": "Oyster Mushroom",
+      "taglines": "Spice up your dishes with bold flavor.",
+      "allergens": [],
+      "ingredients": [
+        "Oyster Mushroom",
+        "Red Chilli Pepper",
+        "Garlic",
+        "Vegetable Oil",
+        "Spices"
+      ],
+      "nutritionalFacts": [],
+      "netWeight": "0g"
+    }
+  },
+  {
+    "_id": "662656ff682f454279097136",
+    "options": [
+      {
+        "name": "Big Jar",
+        "variants": [
+          {
+            "_id": "661c7366d2b434b86fee3078",
+            "name": "Big Jar",
+            "amount": 120,
+            "attributes": [],
+            "details": "662656ff682f454279097136",
+            "netWeight": "0g",
+            "images": []
+          }
+        ]
+      },
+      {
+        "name": "Small Jar",
+        "variants": [
+          {
+            "_id": "661c7377d2b434b86fee307a",
+            "name": "Small Jar",
+            "amount": 70,
+            "attributes": [],
+            "details": "662656ff682f454279097136",
+            "netWeight": "0g",
+            "images": [
+              {
+                "url": "https://res.cloudinary.com/dfdw1yzkk/image/upload/v1716729161/E%20and%20B%20Farm/products/images/three-fourths/pvte0hliqoa4oibf4auh.png",
+                "tag": "three fourths",
+                "_id": "6653d7bd30ba2b7221ec2866"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "details": {
+      "_id": "662656ff682f454279097136",
+      "name": "Oyster Mushroom Atsara",
+      "description": "Elevate your palate with E and B Farm's Oyster Mushroom Atsara. This delightful pickled mushroom dish is a refreshing take on traditional atsara, combining the tangy goodness of pickling with the unique texture and flavor of oyster mushrooms. Each jar is packed with handpicked mushrooms, marinated in a blend of vinegar, spices, and natural sweeteners.",
+      "gallery": [
+        "https://res.cloudinary.com/dfdw1yzkk/image/upload/v1712994719/E%20and%20B%20Farm/products/images/square/cc5xblbu5ibu8g706kj2.png"
+      ],
+      "__v": 0,
+      "sort": 0,
+      "group": "Oyster Mushroom",
+      "taglines": "Zesty freshness in every bite.",
+      "allergens": [],
+      "ingredients": [
+        "Oyster Mushroom",
+        "Bell Pepper",
+        "Ginger",
+        "Carrots",
+        "Nipa Vinegar",
+        "Sugar"
+      ],
+      "nutritionalFacts": [],
+      "netWeight": "0g"
+    }
+  },
+  {
+    "_id": "6625b1ac50df1852b700ff8d",
+    "options": [
+      {
+        "name": "Small Jar",
+        "variants": [
+          {
+            "_id": "661c7308d2b434b86fee306e",
+            "name": "Small Jar",
+            "amount": 65,
+            "attributes": ["662531180c24a77fc62b8f58"],
+            "details": "6625b1ac50df1852b700ff8d",
+            "netWeight": "0g",
+            "attribute": {
+              "_id": "662531180c24a77fc62b8f58",
+              "type": "Flavor",
+              "value": "Barbeque"
+            },
+            "images": [
+              {
+                "url": "https://res.cloudinary.com/dfdw1yzkk/image/upload/v1716729266/E%20and%20B%20Farm/products/images/three-fourths/a9yd7qybduijzf2pabkm.png",
+                "tag": "three fourths",
+                "_id": "66533acd53915fc638078862"
+              }
+            ]
+          },
+          {
+            "_id": "6625b31f31670215aa4320b1",
+            "name": "Small Jar",
+            "amount": 65,
+            "attributes": ["662531270c24a77fc62b8f59"],
+            "details": "6625b1ac50df1852b700ff8d",
+            "netWeight": "0g",
+            "attribute": {
+              "_id": "662531270c24a77fc62b8f59",
+              "type": "Flavor",
+              "value": "Cheese"
+            },
+            "images": []
+          },
+          {
+            "_id": "6625b33a31670215aa4320b2",
+            "name": "Small Jar",
+            "amount": 65,
+            "attributes": ["662531340c24a77fc62b8f5a"],
+            "details": "6625b1ac50df1852b700ff8d",
+            "netWeight": "0g",
+            "attribute": {
+              "_id": "662531340c24a77fc62b8f5a",
+              "type": "Flavor",
+              "value": "Sour Cream"
+            },
+            "images": []
+          }
+        ]
+      },
+      {
+        "name": "Big Jar",
+        "variants": [
+          {
+            "_id": "661c730fd2b434b86fee3070",
+            "name": "Big Jar",
+            "amount": 110,
+            "attributes": ["662531180c24a77fc62b8f58"],
+            "details": "6625b1ac50df1852b700ff8d",
+            "netWeight": "0g",
+            "attribute": {
+              "_id": "662531180c24a77fc62b8f58",
+              "type": "Flavor",
+              "value": "Barbeque"
+            },
+            "images": [
+              {
+                "url": "https://res.cloudinary.com/dfdw1yzkk/image/upload/v1716729264/E%20and%20B%20Farm/products/images/three-fourths/mjg21m13pl9kpd2lfnkm.png",
+                "tag": "three fourths",
+                "_id": "6653d5cc2a9ada4018850381"
+              }
+            ]
+          },
+          {
+            "_id": "662655807f956967c7ba1d56",
+            "name": "Big Jar",
+            "amount": 110,
+            "attributes": ["662531270c24a77fc62b8f59"],
+            "details": "6625b1ac50df1852b700ff8d",
+            "netWeight": "220g",
+            "attribute": {
+              "_id": "662531270c24a77fc62b8f59",
+              "type": "Flavor",
+              "value": "Cheese"
+            },
+            "images": [
+              {
+                "url": "https://res.cloudinary.com/dfdw1yzkk/image/upload/v1716729256/E%20and%20B%20Farm/products/images/three-fourths/zb87ukvscpfohao60owi.png",
+                "tag": "three fourths",
+                "_id": "6653d5fa7f08a2ae87247214"
+              }
+            ]
+          },
+          {
+            "_id": "662655907f956967c7ba1d57",
+            "name": "Big Jar",
+            "amount": 110,
+            "attributes": ["662531340c24a77fc62b8f5a"],
+            "details": "6625b1ac50df1852b700ff8d",
+            "netWeight": "220g",
+            "attribute": {
+              "_id": "662531340c24a77fc62b8f5a",
+              "type": "Flavor",
+              "value": "Sour Cream"
+            },
+            "images": [
+              {
+                "url": "https://res.cloudinary.com/dfdw1yzkk/image/upload/v1716729242/E%20and%20B%20Farm/products/images/three-fourths/rgpvtoqmqewinkcstb6m.png",
+                "tag": "three fourths",
+                "_id": "6653d624a81fae30a19bf981"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Pouch",
+        "variants": [
+          {
+            "_id": "661c7319d2b434b86fee3072",
+            "name": "Pouch",
+            "amount": 55,
+            "attributes": ["662531180c24a77fc62b8f58"],
+            "details": "6625b1ac50df1852b700ff8d",
+            "netWeight": "110g",
+            "attribute": {
+              "_id": "662531180c24a77fc62b8f58",
+              "type": "Flavor",
+              "value": "Barbeque"
+            },
+            "images": []
+          },
+          {
+            "_id": "662655c87f956967c7ba1d58",
+            "name": "Pouch",
+            "amount": 55,
+            "attributes": ["662531270c24a77fc62b8f59"],
+            "details": "6625b1ac50df1852b700ff8d",
+            "netWeight": "0g",
+            "attribute": {
+              "_id": "662531270c24a77fc62b8f59",
+              "type": "Flavor",
+              "value": "Cheese"
+            },
+            "images": []
+          },
+          {
+            "_id": "662655d57f956967c7ba1d59",
+            "name": "Pouch",
+            "amount": 55,
+            "attributes": ["662531340c24a77fc62b8f5a"],
+            "details": "6625b1ac50df1852b700ff8d",
+            "netWeight": "0g",
+            "attribute": {
+              "_id": "662531340c24a77fc62b8f5a",
+              "type": "Flavor",
+              "value": "Sour Cream"
+            },
+            "images": [
+              {
+                "url": "https://res.cloudinary.com/dfdw1yzkk/image/upload/v1716729234/E%20and%20B%20Farm/products/images/three-fourths/jlaqxa8urqylsh4mcu1c.png",
+                "tag": "three fourths",
+                "_id": "6653d65effdbe5d5abb7f18e"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "details": {
+      "_id": "6625b1ac50df1852b700ff8d",
+      "name": "Banana Sticks",
+      "description": "Experience the natural sweetness of E and B Farm's Banana Sticks, available in three delectable flavors: Cheese, Barbeque, and Sour Cream. Made from carefully selected ripe bananas, these sticks are dehydrated to perfection, preserving their rich, sweet flavor and chewy texture. Each flavor variant offers a unique twist on this wholesome snack, from the savory and tangy Cheese to the bold and smoky Barbeque.",
+      "gallery": [],
+      "__v": 0,
+      "sort": 2,
+      "group": "Banana",
+      "taglines": "Naturally sweet, irresistibly tasty.",
+      "allergens": [],
+      "ingredients": ["Saba Banana", "Coconut Oil", "Salt"],
+      "nutritionalFacts": [],
+      "netWeight": "0g"
+    }
+  }
+]

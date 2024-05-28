@@ -90,7 +90,13 @@ const getProductItems = asyncHandler(async (req: Request, res: Response) => {
   res.status(200).json(products);
 });
 
-const getProductList = asyncHandler(async (req: Request, res: Response) => {
+const getProductItem = asyncHandler(async (req: Request, res: Response) => {
+  let productItem = await ProductItem.findById(req.params.id);
+
+  res.status(200).json(productItem);
+});
+
+/* const getProductList = asyncHandler(async (req: Request, res: Response) => {
   const { group } = req.params;
 
   let products = await Product.aggregate([
@@ -185,6 +191,93 @@ const getProductList = asyncHandler(async (req: Request, res: Response) => {
   ]);
 
   res.status(200).json(products);
+}); */
+
+const getProductList = asyncHandler(async (req: Request, res: Response) => {
+  let productItem = await ProductItem.aggregate([
+    {
+      $match: {},
+    },
+    {
+      $lookup: {
+        from: "productoptions",
+        localField: "attribute",
+        foreignField: "_id",
+        as: "attribute",
+      },
+    },
+    {
+      $unwind: { path: "$attribute", preserveNullAndEmptyArrays: true },
+    },
+    {
+      $set: {
+        attribute: {
+          $cond: {
+            if: { $eq: ["$attribute", []] },
+            then: null,
+            else: "$attribute",
+          },
+        },
+      },
+    },
+    {
+      $group: {
+        _id: {
+          product: "$details",
+          option: "$name",
+        },
+        name: { $first: "$name" },
+        variants: { $push: "$$ROOT" },
+      },
+    },
+    {
+      $group: {
+        _id: "$_id.product",
+        options: { $push: "$$ROOT" },
+      },
+    },
+    {
+      $unset: "options._id",
+    },
+    {
+      $match: {
+        _id: { $ne: null },
+      },
+    },
+    {
+      $lookup: {
+        from: "products",
+        localField: "_id",
+        foreignField: "_id",
+        as: "details",
+      },
+    },
+    {
+      $unwind: { path: "$details", preserveNullAndEmptyArrays: true },
+    },
+    // for sorting
+    {
+      $addFields: {
+        sortField: {
+          $cond: {
+            if: { $eq: ["$details.sort", 0] },
+            then: Number.POSITIVE_INFINITY,
+            else: "$details.sort",
+          },
+        },
+      },
+    },
+    {
+      $sort: { sortField: 1 },
+    },
+    {
+      $project: {
+        sortField: 0,
+      },
+    },
+  ]);
+
+  res.status(200).json(productItem);
 });
 
 const createProduct = asyncHandler(async (req: Request, res: Response) => {
@@ -200,17 +293,18 @@ const createProduct = asyncHandler(async (req: Request, res: Response) => {
 
 const script = asyncHandler(async (req: Request, res: Response) => {
   // const response = await Product.updateMany({}, { group: "" });
-  const response = await ProductItem.updateMany(
-    { _id: "661c7308d2b434b86fee306e" },
+  const response = await ProductItem
+    .updateMany
+    /* { _id: "661c7377d2b434b86fee307a" },
     {
       $push: {
         images: {
-          url: "https://res.cloudinary.com/dfdw1yzkk/image/upload/v1716729266/E%20and%20B%20Farm/products/images/three-fourths/a9yd7qybduijzf2pabkm.png",
+          url: "https://res.cloudinary.com/dfdw1yzkk/image/upload/v1716729161/E%20and%20B%20Farm/products/images/three-fourths/pvte0hliqoa4oibf4auh.png",
           tag: "three fourths",
         },
       },
-    }
-  );
+    } */
+    ();
 
   res.status(200).json(response);
 });
@@ -218,7 +312,9 @@ const script = asyncHandler(async (req: Request, res: Response) => {
 module.exports = {
   getProducts,
   getProductItems,
+  getProductItem,
   getProductList,
+  // getProductList2,
   createProduct,
 
   script,
