@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 const asyncHandler = require("express-async-handler");
+import mongoose from "mongoose";
+import { pipeline } from "stream";
 
 const { Product, ProductItem } = require("../models/product");
 const { OrderAddress, Order } = require("../models/order");
@@ -91,107 +93,38 @@ const getProductItems = asyncHandler(async (req: Request, res: Response) => {
 });
 
 const getProductItem = asyncHandler(async (req: Request, res: Response) => {
-  let productItem = await ProductItem.findById(req.params.id);
-
-  res.status(200).json(productItem);
-});
-
-/* const getProductList = asyncHandler(async (req: Request, res: Response) => {
-  const { group } = req.params;
-
-  let products = await Product.aggregate([
+  let productItem = await Product.aggregate([
     {
-      $match: group && group !== "all" ? { group: group } : {},
+      $match: { code: req.params.code },
     },
     {
       $lookup: {
         from: "productitems",
         localField: "_id",
         foreignField: "details",
-        as: "options",
-      },
-    },
-    {
-      $unwind: { path: "$options", preserveNullAndEmptyArrays: true },
-    },
-    {
-      $lookup: {
-        from: "productoptions",
-        localField: "options.attributes",
-        foreignField: "_id",
-        as: "options.attributes",
-      },
-    },
-    {
-      $lookup: {
-        from: "productoptions",
-        localField: "options.attribute",
-        foreignField: "_id",
-        as: "options.attribute",
-      },
-    },
-    {
-      $unwind: { path: "$options.attribute", preserveNullAndEmptyArrays: true },
-    },
-    {
-      $group: {
-        _id: {
-          product: "$_id",
-          name: "$options.name",
-        },
-        name: {
-          $first: {
-            $cond: [
-              { $ne: ["$options.name", ""] }, // If options.name is not empty
-              { $concat: ["$name", " ", "$options.name"] }, // Concatenate name and options.name
-              "$name", // Otherwise, use just the name field
-            ],
-          },
-        },
-        options: {
-          $addToSet: "$options",
-        },
-      },
-    },
-    {
-      $lookup: {
-        from: "products",
-        localField: "_id.product",
-        foreignField: "_id",
-        as: "product",
-      },
-    },
-    {
-      $group: {
-        _id: "$name",
-        options: { $first: "$options" },
-        details: { $first: "$product" },
-      },
-    },
-    {
-      $set: {
-        name: "$_id",
-        _id: {
-          $toLower: {
-            $replaceAll: {
-              input: "$_id",
-              find: " ",
-              replacement: "-",
+        pipeline: [
+          {
+            $lookup: {
+              from: "productoptions",
+              localField: "attribute",
+              foreignField: "_id",
+              as: "attribute",
             },
           },
-        },
+          {
+            $unwind: { path: "$attribute" },
+          },
+          {
+            $sort: { default: -1 },
+          },
+        ],
+        as: "variants",
       },
-    },
-    {
-      $unwind: { path: "$details", preserveNullAndEmptyArrays: true },
-    },
-    {
-      $sort: { "details.name": 1 },
     },
   ]);
 
-  res.status(200).json(products);
-}); */
+  res.status(200).json(productItem[0]);
+});
 
 const getProductList = asyncHandler(async (req: Request, res: Response) => {
   let productItem = await ProductItem.aggregate([
@@ -293,18 +226,7 @@ const createProduct = asyncHandler(async (req: Request, res: Response) => {
 
 const script = asyncHandler(async (req: Request, res: Response) => {
   // const response = await Product.updateMany({}, { group: "" });
-  const response = await ProductItem
-    .updateMany
-    /* { _id: "661c7377d2b434b86fee307a" },
-    {
-      $push: {
-        images: {
-          url: "https://res.cloudinary.com/dfdw1yzkk/image/upload/v1716729161/E%20and%20B%20Farm/products/images/three-fourths/pvte0hliqoa4oibf4auh.png",
-          tag: "three fourths",
-        },
-      },
-    } */
-    ();
+  const response = await ProductItem.updateMany({}, { default: false });
 
   res.status(200).json(response);
 });

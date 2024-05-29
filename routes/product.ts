@@ -13,10 +13,8 @@ const {
 
 router.get("/", getProducts);
 router.get("/items", getProductItems);
-router.get("/item/:id", getProductItem);
+router.get("/item/:code", getProductItem);
 router.get("/list", getProductList);
-// router.get("/list/:group", getProductList);
-router.get("/list2", getProductList);
 router.post("/", createProduct);
 
 router.get("/script", script);

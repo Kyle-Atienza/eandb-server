@@ -4,6 +4,10 @@ const { ObjectId } = mongoose.Schema;
 
 // product
 const ProductSchema = new mongoose.Schema({
+  code: {
+    type: String,
+    required: [true, "Please add a name"],
+  },
   name: {
     type: String,
     required: [true, "Please add a name"],
@@ -86,6 +90,10 @@ const ProductItemSchema = new mongoose.Schema({
       },
     },
   ],
+  default: {
+    type: Boolean,
+    default: false,
+  },
 });
 const ProductItem = mongoose.model<ProductItemDoc>(
   "ProductItem",

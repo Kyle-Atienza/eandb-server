@@ -41,6 +41,7 @@ declare global {
   //product
   interface ProductDoc extends Document {
     _id: mongoose.Types.ObjectId;
+    code: string;
     name: string;
     description?: string;
     taglines?: string;
