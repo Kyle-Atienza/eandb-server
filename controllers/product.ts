@@ -126,7 +126,13 @@ const getProductItem = asyncHandler(async (req: Request, res: Response) => {
   res.status(200).json(productItem[0]);
 });
 
-const getProductList = asyncHandler(async (req: Request, res: Response) => {
+const getProductOptions = asyncHandler(async (req: Request, res: Response) => {
+  const group = req.params.group;
+  const parsedGroup = group
+    .split("-")
+    .map((item) => item[0].toUpperCase() + item.slice(1))
+    .join(" ");
+
   let productItem = await ProductItem.aggregate([
     {
       $match: {},
@@ -188,6 +194,9 @@ const getProductList = asyncHandler(async (req: Request, res: Response) => {
     {
       $unwind: { path: "$details", preserveNullAndEmptyArrays: true },
     },
+    {
+      $match: group === "all" ? {} : { "details.group": parsedGroup },
+    },
     // for sorting
     {
       $addFields: {
@@ -235,8 +244,8 @@ module.exports = {
   getProducts,
   getProductItems,
   getProductItem,
-  getProductList,
-  // getProductList2,
+  getProductOptions,
+  // getProductOptions2,
   createProduct,
 
   script,

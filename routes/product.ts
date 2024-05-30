@@ -5,8 +5,8 @@ const {
   getProducts,
   getProductItems,
   getProductItem,
-  getProductList,
-  // getProductList2,
+  getProductOptions,
+  // getProductOptions2,
   createProduct,
   script,
 } = require("../controllers/product");
@@ -14,7 +14,7 @@ const {
 router.get("/", getProducts);
 router.get("/items", getProductItems);
 router.get("/item/:code", getProductItem);
-router.get("/list", getProductList);
+router.get("/options/:group", getProductOptions);
 router.post("/", createProduct);
 
 router.get("/script", script);
