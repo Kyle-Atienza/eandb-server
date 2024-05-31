@@ -14,6 +14,7 @@ const {
 router.get("/", getProducts);
 router.get("/items", getProductItems);
 router.get("/item/:code", getProductItem);
+router.get("/item/:code/:option", getProductItem);
 router.get("/options/:group", getProductOptions);
 router.post("/", createProduct);
 

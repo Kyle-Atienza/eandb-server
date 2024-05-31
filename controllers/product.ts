@@ -1,7 +1,5 @@
 import { Request, Response } from "express";
 const asyncHandler = require("express-async-handler");
-import mongoose from "mongoose";
-import { pipeline } from "stream";
 
 const { Product, ProductItem } = require("../models/product");
 const { OrderAddress, Order } = require("../models/order");
@@ -112,7 +110,17 @@ const getProductItem = asyncHandler(async (req: Request, res: Response) => {
             },
           },
           {
-            $unwind: { path: "$attribute" },
+            $unwind: { path: "$attribute", preserveNullAndEmptyArrays: true },
+          },
+          {
+            $match: req.params.option
+              ? {
+                  name: req.params.option
+                    .split("-")
+                    .map((word) => word[0].toUpperCase() + word.slice(1))
+                    .join(" "),
+                }
+              : {},
           },
           {
             $sort: { default: -1 },
