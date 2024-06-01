@@ -4,6 +4,10 @@ const { ObjectId } = mongoose.Schema;
 
 // product
 const ProductSchema = new mongoose.Schema({
+  code: {
+    type: String,
+    required: [true, "Please add a name"],
+  },
   name: {
     type: String,
     required: [true, "Please add a name"],
@@ -61,14 +65,34 @@ const ProductItemSchema = new mongoose.Schema({
     required: [true, "Please add an amount"],
   },
   attributes: [
+    // need to remove
     {
       type: mongoose.Types.ObjectId,
       ref: "ProductOption",
     },
   ],
+  attribute: {
+    type: mongoose.Types.ObjectId,
+    ref: "ProductOption",
+  },
   stock: {
     type: Number,
     default: 0,
+  },
+  netWeight: String,
+  images: [
+    {
+      url: String,
+      tag: {
+        type: String,
+        default: "",
+        enum: ["", "thumbnail", "three fourths", "square"],
+      },
+    },
+  ],
+  default: {
+    type: Boolean,
+    default: false,
   },
 });
 const ProductItem = mongoose.model<ProductItemDoc>(

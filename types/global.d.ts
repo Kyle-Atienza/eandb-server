@@ -41,6 +41,7 @@ declare global {
   //product
   interface ProductDoc extends Document {
     _id: mongoose.Types.ObjectId;
+    code: string;
     name: string;
     description?: string;
     taglines?: string;
@@ -62,7 +63,10 @@ declare global {
     //new
     details: mongoose.Types.ObjectId;
     attributes: mongoose.Types.ObjectId[];
+    attribute: mongoose.Types.ObjectId;
     stock: number;
+    netWeight: string;
+    images: [{ url: string; tag: string }];
   }
   interface ProductOptionDoc extends Document {
     _id: mongoose.Types.ObjectId;

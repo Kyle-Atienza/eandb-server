@@ -83,95 +83,151 @@ const getProducts = asyncHandler(async (req: Request, res: Response) => {
 });
 
 const getProductItems = asyncHandler(async (req: Request, res: Response) => {
-  let products = await ProductItem.find().populate("details attributes");
+  let products = await ProductItem.find().populate(
+    "details attributes attribute"
+  );
 
   res.status(200).json(products);
 });
 
-const getProductList = asyncHandler(async (req: Request, res: Response) => {
-  const { group } = req.params;
-
-  let products = await Product.aggregate([
+const getProductItem = asyncHandler(async (req: Request, res: Response) => {
+  let productItem = await Product.aggregate([
     {
-      $match: group && group !== "all" ? { group: group } : {},
+      $match: { code: req.params.code },
     },
     {
       $lookup: {
         from: "productitems",
         localField: "_id",
         foreignField: "details",
-        as: "options",
+        pipeline: [
+          {
+            $lookup: {
+              from: "productoptions",
+              localField: "attribute",
+              foreignField: "_id",
+              as: "attribute",
+            },
+          },
+          {
+            $unwind: { path: "$attribute", preserveNullAndEmptyArrays: true },
+          },
+          {
+            $match: req.params.option
+              ? {
+                  name: req.params.option
+                    .split("-")
+                    .map((word) => word[0].toUpperCase() + word.slice(1))
+                    .join(" "),
+                }
+              : {},
+          },
+          {
+            $sort: { default: -1 },
+          },
+        ],
+        as: "variants",
       },
     },
+  ]);
+
+  res.status(200).json(productItem[0]);
+});
+
+const getProductOptions = asyncHandler(async (req: Request, res: Response) => {
+  const group = req.params.group;
+  const parsedGroup = group
+    .split("-")
+    .map((item) => item[0].toUpperCase() + item.slice(1))
+    .join(" ");
+
+  let productItem = await ProductItem.aggregate([
     {
-      $unwind: { path: "$options", preserveNullAndEmptyArrays: true },
+      $match: {},
     },
     {
       $lookup: {
         from: "productoptions",
-        localField: "options.attributes",
+        localField: "attribute",
         foreignField: "_id",
-        as: "options.attributes",
+        as: "attribute",
+      },
+    },
+    {
+      $unwind: { path: "$attribute", preserveNullAndEmptyArrays: true },
+    },
+    {
+      $set: {
+        attribute: {
+          $cond: {
+            if: { $eq: ["$attribute", []] },
+            then: null,
+            else: "$attribute",
+          },
+        },
       },
     },
     {
       $group: {
         _id: {
-          product: "$_id",
-          name: "$options.name",
+          product: "$details",
+          option: "$name",
         },
-        name: {
-          $first: {
-            $cond: [
-              { $ne: ["$options.name", ""] }, // If options.name is not empty
-              { $concat: ["$name", " ", "$options.name"] }, // Concatenate name and options.name
-              "$name", // Otherwise, use just the name field
-            ],
-          },
-        },
-        options: {
-          $addToSet: "$options",
-        },
+        name: { $first: "$name" },
+        variants: { $push: "$$ROOT" },
+      },
+    },
+    {
+      $group: {
+        _id: "$_id.product",
+        options: { $push: "$$ROOT" },
+      },
+    },
+    {
+      $unset: "options._id",
+    },
+    {
+      $match: {
+        _id: { $ne: null },
       },
     },
     {
       $lookup: {
         from: "products",
-        localField: "_id.product",
+        localField: "_id",
         foreignField: "_id",
-        as: "product",
-      },
-    },
-    {
-      $group: {
-        _id: "$name",
-        options: { $first: "$options" },
-        details: { $first: "$product" },
-      },
-    },
-    {
-      $set: {
-        name: "$_id",
-        _id: {
-          $toLower: {
-            $replaceAll: {
-              input: "$_id",
-              find: " ",
-              replacement: "-",
-            },
-          },
-        },
+        as: "details",
       },
     },
     {
       $unwind: { path: "$details", preserveNullAndEmptyArrays: true },
     },
     {
-      $sort: { "details.name": 1 },
+      $match: group === "all" ? {} : { "details.group": parsedGroup },
+    },
+    // for sorting
+    {
+      $addFields: {
+        sortField: {
+          $cond: {
+            if: { $eq: ["$details.sort", 0] },
+            then: Number.POSITIVE_INFINITY,
+            else: "$details.sort",
+          },
+        },
+      },
+    },
+    {
+      $sort: { sortField: 1 },
+    },
+    {
+      $project: {
+        sortField: 0,
+      },
     },
   ]);
 
-  res.status(200).json(products);
+  res.status(200).json(productItem);
 });
 
 const createProduct = asyncHandler(async (req: Request, res: Response) => {
@@ -187,12 +243,7 @@ const createProduct = asyncHandler(async (req: Request, res: Response) => {
 
 const script = asyncHandler(async (req: Request, res: Response) => {
   // const response = await Product.updateMany({}, { group: "" });
-  const response = await Product.updateMany(
-    { _id: "662529d40658cf1ba44a7d46" },
-    {
-      awards: "Most Innovative Product of MIMAROPA 2016",
-    }
-  );
+  const response = await ProductItem.updateMany({}, { default: false });
 
   res.status(200).json(response);
 });
@@ -200,7 +251,9 @@ const script = asyncHandler(async (req: Request, res: Response) => {
 module.exports = {
   getProducts,
   getProductItems,
-  getProductList,
+  getProductItem,
+  getProductOptions,
+  // getProductOptions2,
   createProduct,
 
   script,

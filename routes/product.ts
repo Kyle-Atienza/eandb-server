@@ -4,15 +4,18 @@ const router = express.Router();
 const {
   getProducts,
   getProductItems,
-  getProductList,
+  getProductItem,
+  getProductOptions,
+  // getProductOptions2,
   createProduct,
   script,
 } = require("../controllers/product");
 
 router.get("/", getProducts);
 router.get("/items", getProductItems);
-router.get("/list", getProductList);
-router.get("/list/:group", getProductList);
+router.get("/item/:code", getProductItem);
+router.get("/item/:code/:option", getProductItem);
+router.get("/options/:group", getProductOptions);
 router.post("/", createProduct);
 
 router.get("/script", script);

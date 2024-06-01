@@ -71,8 +71,6 @@ const signIn = asyncHandler(async (req: AppRequest, res: Response) => {
 });
 
 const updateMe = asyncHandler(async (req: AppRequest, res: Response) => {
-  console.log(req.body);
-
   const user = await User.findOneAndUpdate({ _id: req.user._id }, req.body, {
     new: true,
   });

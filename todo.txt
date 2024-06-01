@@ -1,5 +1,1 @@
-properties to add on product
-- nutritionalFacts
-- ingredients
-- allergens
-- awards
+remove attrivutes property on productitem
