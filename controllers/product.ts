@@ -91,6 +91,8 @@ const getProductItems = asyncHandler(async (req: Request, res: Response) => {
 });
 
 const getProductItem = asyncHandler(async (req: Request, res: Response) => {
+  console.log("test on live");
+
   let productItem = await Product.aggregate([
     {
       $match: { code: req.params.code },
